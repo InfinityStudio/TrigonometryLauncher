@@ -8,14 +8,15 @@ import org.apache.commons.io.FileUtils;
  * @author Decker
  */
 public final class AddonLoader {
-    private final  File addonsFolder;
+
+    private final File addonsFolder;
+
     public AddonLoader(String addonsFolerPath) {
-        if (!new File(addonsPath).isDirectory()) {
+        this.addonsFolder = new File(addonsFolerPath);
+        if (!addonsFolder.isDirectory()) {
             throw new IllegalArgumentException("path is not a directory");
         }
-        FileU
+
     }
-    
-    
 
 }
