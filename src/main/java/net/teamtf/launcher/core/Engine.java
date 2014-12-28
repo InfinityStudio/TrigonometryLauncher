@@ -12,19 +12,18 @@ import java.net.MalformedURLException;
  * @Author Decker
  */
 public class Engine {
-    private Engine instance;
 
-    public void initEngine() throws ClassNotFoundException, MalformedURLException, InstantiationException, IllegalAccessException {
-        if(instance==null)
-        {
-            instance=new Engine();
-        }
-        else
-        {
+    private static Engine instance;
+
+    public static void initEngine() throws ClassNotFoundException, MalformedURLException, InstantiationException, IllegalAccessException {
+        if (instance == null) {
+            instance = new Engine();
+        } else {
             throw new IllegalAccessException("Engine has already initialized");
         }
     }
-    public Engine getInstance() {
+
+    public static Engine getEngine() {
         return instance;
     }
 
@@ -35,10 +34,19 @@ public class Engine {
 
     Engine() throws ClassNotFoundException, MalformedURLException, InstantiationException, IllegalAccessException {
         this.uiController = new DefaultUIControler();
-        this.launcher=new DefaultLauncher();
+        this.launcher = new DefaultLauncher();
         this.logger = LogFactory.getLog("MainLogger");
-        this.addonLoader=new AddonLoader("addons");
+        this.addonLoader = new AddonLoader("addons");
+
+    }
+
+    public void start() throws Exception {
+        //TODO:Still under develop
+        //I just put everything here as possible.
         this.addonLoader.loadFilesFromFolder();
+        this.addonLoader.perLoadAllAddons();
+        this.addonLoader.loadAddAddons();
+        this.addonLoader.postLoadAllAddons();
     }
 
     public Log getLogger() {
