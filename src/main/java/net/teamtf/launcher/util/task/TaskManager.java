@@ -9,7 +9,6 @@ import java.util.concurrent.Executors;
  * This list provide a pattern to execute function which we highly recommend to
  * use
  *
- *
  * @author decker
  */
 public final class TaskManager {
@@ -41,4 +40,34 @@ public final class TaskManager {
         asyncPool.shutdown();
         return null;
     }
+
+    /**
+     * Insert task at the end of task list
+     *
+     * @param task the task which you want insert
+     */
+    public void insertTask(Task task) {
+        this.tasks.add(task);
+    }
+
+    /**
+     * Insert task at certain index of task list
+     *
+     * @param index the sequence you want your task execute
+     * @param task  the task which you want insert
+     */
+    public void insertTask(Integer index, Task task) {
+        this.tasks.add(index, task);
+    }
+
+    /**
+     * Remove task which at the end of task list
+     *
+     * @param index the sequence of task
+     */
+    public void removeTask(Integer index) {
+        this.tasks.remove(index);
+    }
+
+
 }

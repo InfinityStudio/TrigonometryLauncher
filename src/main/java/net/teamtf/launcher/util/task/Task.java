@@ -24,6 +24,5 @@ package net.teamtf.launcher.util.task;
  */
 public interface Task extends Runnable{
     public String getName();
-    public String setName();
     
 }
