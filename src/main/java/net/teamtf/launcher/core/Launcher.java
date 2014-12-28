@@ -1,9 +1,11 @@
 package net.teamtf.launcher.core;
 
+import net.teamtf.launcher.util.task.TaskManager;
+
 /**
- *
- * @author Decker
+ * Created by Decker on 2014/12/27.
  */
-public class Launcher {
-    
+public interface Launcher {
+    public void launch();
+    public TaskManager getLaunchTaskManager();
 }
