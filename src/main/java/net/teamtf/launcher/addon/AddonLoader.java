@@ -92,7 +92,7 @@ public final class AddonLoader {
         }
     }
 
-    public void loadAddAddons() {
+    public void loadAllAddons() {
         for (Addon addon : this.getAddonsSortedByPriority()) {
             addon.load();
         }
