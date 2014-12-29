@@ -39,7 +39,7 @@ public class Config {
     private File configFile;
     private HashMap<String, String> config;
 
-    private void saveTofFile() {
+    private void saveToFile() {
         try {
             String stringToFile = (String) (new Yaml().dump(this.config));
             FileUtils.writeStringToFile(configFile, stringToFile);
@@ -51,7 +51,8 @@ public class Config {
 
     public Config() {
         try {
-            configFile = new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8")).getParentFile().getCanonicalPath()).toPath().resolve("config.yml").toFile();
+            configFile = new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(),
+                "UTF-8")).getParentFile().getCanonicalPath()).toPath().resolve("config.yml").toFile();
             if (!configFile.exists()) {
                 configFile.createNewFile();
             } else {
