@@ -6,6 +6,9 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.jar.JarFile;
+import net.teamtf.launcher.core.Engine;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Decker
@@ -32,10 +35,11 @@ public final class AddonLoader {
     }
 
     /**
-     * Load all addons from specified folder path.
-     * Add them to particular query through splitting their priority.
+     * Load all addons from specified folder path. Add them to particular query
+     * through splitting their priority.
      *
-     * @throws ClassNotFoundException if there no class implement Addon interface
+     * @throws ClassNotFoundException if there no class implement Addon
+     * interface
      * @throws IllegalAccessException
      * @throws InstantiationException
      * @throws MalformedURLException
@@ -43,13 +47,32 @@ public final class AddonLoader {
     public void loadFilesFromFolder() throws ClassNotFoundException, IllegalAccessException, InstantiationException, MalformedURLException {
 
         for (File listFile : addonsFolder.listFiles()) {
+            Addon addon;
+            try {
+                JarFile addonFile = new JarFile(listFile);
+                String mainClass = addonFile.getManifest().getMainAttributes().getValue("Addon-Class");
+                if (StringUtils.isEmpty(mainClass)) {
+                    Engine.getEngine().getLogger().error(String.format("No declared Addon-Class found in MAINFAST.MF in%s. Load gave up.", listFile.getPath()));
+                }
+                URLClassLoader loader = new URLClassLoader(new URL[]{listFile.toURI().toURL()});
+                Class addonClass = loader.loadClass(mainClass);
+                Object instance = addonClass.newInstance();
+                if (!(instance instanceof Addon)) {
+                    throw new ClassCastException("Specified class is not a instance of addon.");
+                }
+                addon = (Addon) instance;
+            } catch (Exception e) {
+                Engine.getEngine().getLogger().error(String.format("Can not load addon file%s", listFile.getPath()), e);
+                continue;
 
-            URLClassLoader loader = new URLClassLoader(new URL[]{listFile.toURI().toURL()});
-            Class addonClass = loader.loadClass("AddonImpl");
-            Addon addon = (Addon) addonClass.newInstance();
+            }
 
             //Check if the add which has same name had already loaded.
             if (entireAddons.containsKey(addon.getAddonName())) {
+                if (addon.getAddonName().equals(entireAddons.get(addon.getAddonName()).getAddonName())
+                        && (addon.getVersion() == entireAddons.get(addon.getAddonName()).getVersion())) {
+                    continue;
+                }
                 //Thus get the latest version
                 addon = this.selectProprietyAddon(addon, entireAddons.get(addon.getAddonName()));
             }
@@ -83,7 +106,7 @@ public final class AddonLoader {
         sortedList.addAll(this.highLevelAddons);
         sortedList.addAll(this.midLevelAddons);
         sortedList.addAll(this.lowLevelAddons);
-        return (Addon[]) sortedList.toArray();
+        return sortedList.toArray(new Addon[]{});
     }
 
     public void perLoadAllAddons() {
