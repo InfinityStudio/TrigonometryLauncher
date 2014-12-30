@@ -32,7 +32,7 @@ public class Config {
     public String getConfig(String key) {
         String res = this.config.get(key);
         if (StringUtils.isEmpty(res)) {
-            throw new IllegalAccessException("No such config");
+            this.configLogSystem.warn(String.format("No such key called '%s' contained in this config", key));
         }
         return res;
     }
