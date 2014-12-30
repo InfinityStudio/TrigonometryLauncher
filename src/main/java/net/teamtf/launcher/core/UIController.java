@@ -1,14 +1,16 @@
 package net.teamtf.launcher.core;
 
-import javax.swing.*;
+import java.awt.Dialog;
+import java.awt.Window;
 
 /**
- * This instance class controls all instaces of GUI
+ * This instance class controls all instance of GUI
  * @author Decker
  */
 public interface UIController {
 
-    public JFrame getMainWindow();
-    public JDialog getConfigDialog();
-    public JDialog getAuthDialog();
+    public Window getMainWindow();
+    public Dialog getConfigDialog();
+    public Dialog getAuthDialog();
+    public void closeAddWindow();
 }
