@@ -51,13 +51,16 @@ public final class AddonLoader {
             try {
                 JarFile addonFile = new JarFile(listFile);
                 String mainClass = addonFile.getManifest().getMainAttributes().getValue("Addon-Class");
-                if(StringUtils.isEmpty(mainClass))
-                {
+                if (StringUtils.isEmpty(mainClass)) {
                     Engine.getEngine().getLogger().error(String.format("No declared Addon-Class found in MAINFAST.MF in%s. Load gave up.", listFile.getPath()));
                 }
                 URLClassLoader loader = new URLClassLoader(new URL[]{listFile.toURI().toURL()});
                 Class addonClass = loader.loadClass(mainClass);
-                addon = (Addon) addonClass.newInstance();
+                Object instance = addonClass.newInstance();
+                if (!(instance instanceof Addon)) {
+                    throw new ClassCastException("Specified class is not a instance of addon.");
+                }
+                addon = (Addon) instance;
             } catch (Exception e) {
                 Engine.getEngine().getLogger().error(String.format("Can not load addon file%s", listFile.getPath()), e);
                 continue;
@@ -66,6 +69,10 @@ public final class AddonLoader {
 
             //Check if the add which has same name had already loaded.
             if (entireAddons.containsKey(addon.getAddonName())) {
+                if (addon.getAddonName().equals(entireAddons.get(addon.getAddonName()).getAddonName())
+                        && (addon.getVersion() == entireAddons.get(addon.getAddonName()).getVersion())) {
+                    continue;
+                }
                 //Thus get the latest version
                 addon = this.selectProprietyAddon(addon, entireAddons.get(addon.getAddonName()));
             }
@@ -99,7 +106,7 @@ public final class AddonLoader {
         sortedList.addAll(this.highLevelAddons);
         sortedList.addAll(this.midLevelAddons);
         sortedList.addAll(this.lowLevelAddons);
-        return  sortedList.toArray(new Addon[]{});
+        return sortedList.toArray(new Addon[]{});
     }
 
     public void perLoadAllAddons() {
