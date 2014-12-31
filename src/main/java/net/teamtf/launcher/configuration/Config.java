@@ -47,7 +47,7 @@ public class Config {
         try {
             //I do not know which implementation is better. 
             //But, by following the principle of Occam's Razor, I would using simple one.
-            //If exception occures at here, replace by next implementation.
+            //If exception occurs at here, replace by next implementation.
             configFile = new File(configFilePath);
             //configFile = new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8")).getParentFile().getCanonicalPath()).toPath().resolve(configFilePath).toFile();
 

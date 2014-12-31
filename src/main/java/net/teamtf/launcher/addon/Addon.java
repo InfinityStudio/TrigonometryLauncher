@@ -7,7 +7,7 @@ package net.teamtf.launcher.addon;
 public interface Addon {
 
     /**
-     * Provide name for this addon. In addintion, Loader using this name to
+     * Provide name for this addon. In addition, Loader using this name to
      * identify addon , therefore, be sure this name is unique according other
      * addons.
      *
@@ -35,22 +35,22 @@ public interface Addon {
     /**
      * Load all prerequisites.
      *
-     * We recommend addons load files for their self in this pahse. Launcher
-     * files should alredy loeaded after this phase. Moreover, all addons file
+     * We recommend addons load files for their self in this phase. Launcher
+     * files should already loaded after this phase. Moreover, all addons file
      * have already loaded before this phase. Thus, you may would like to
-     * detecte other addons for dependency intention.
+     * detect other addons for dependency intention.
      */
     public void preLoad();
 
     /**
      * Interactive with launcher core. In this phase, GUI should already fully
-     * initiallized. We recommend addons add their elements to main window at
+     * initialized. We recommend addons add their elements to main window at
      * this phase.
      */
     public void load();
 
     /**
-     * Interactive with other addones. In this pase, all externed component
+     * Interactive with other addons. In this phase, all extended component
      * added by addons should already done. We recommend addons interactive with
      * other addons in this phase.
      */

@@ -75,7 +75,7 @@ public class TaskManager {
      * @param taskName of task
      * @return first index of task which hold that name, -1 if not exists.
      */
-    public Integer getTaskSquenceByName(String taskName) {
+    public Integer getTaskSequenceByName(String taskName) {
         for (int i = 0; i < this.tasks.size(); i++) {
             if (this.tasks.get(i).getName().equals(taskName)) {
                 return i + 1;
