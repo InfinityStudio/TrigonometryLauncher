@@ -1,12 +1,14 @@
 package net.teamtf.launcher.core;
 
-import net.teamtf.launcher.basis.GUI.DefaultUIControler;
+import net.teamtf.launcher.basis.gui.DefaultUIControler;
 import net.teamtf.launcher.addon.AddonLoader;
 import net.teamtf.launcher.basis.DefaultLauncher;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.net.MalformedURLException;
+
 import net.teamtf.launcher.configuration.Config;
 
 /**
