@@ -52,7 +52,7 @@ public class I18N {
      * Get the localized string by a key
      * 
      * @param key key of the localized string
-     * @return the localized string
+     * @return the localized string (if it is missing, will return the key)
      */
     public static String get(String key) {
 	String string = map.get(key);
@@ -67,7 +67,7 @@ public class I18N {
     }
     
     /**
-     * @return The default lang file name.
+     * @return the default lang file name.
      */
     public static String getDefaultLangfileName() {
 	return defaultLangfileName;
