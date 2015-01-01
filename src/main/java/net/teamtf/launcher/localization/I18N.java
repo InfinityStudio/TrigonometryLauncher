@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.PatternSyntaxException;
 
 import net.teamtf.launcher.core.Engine;
 
@@ -40,7 +39,7 @@ public class I18N {
 		try {
 		    String[] elements = line.split("=", 2);
 		    map.put(elements[0], elements[1]);
-		} catch (PatternSyntaxException ex) {
+		} catch (Exception ex) {
 		    ;
 		}
 	    }
