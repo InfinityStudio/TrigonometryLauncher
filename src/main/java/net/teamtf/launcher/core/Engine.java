@@ -33,6 +33,7 @@ public class Engine {
     private final Log logger;
     private UIController uiController;
     private Launcher launcher;
+    private I18N i18n;
     private final AddonLoader addonLoader;
     private final Config configuration;
     
@@ -106,6 +107,20 @@ public class Engine {
      */
     public void setUiController(UIController uiController) {
         this.uiController = uiController;
+    }
+
+    /**
+     * @return the i18n
+     */
+    public I18N getI18n() {
+        return i18n;
+    }
+
+    /**
+     * @param i18n the i18n to set
+     */
+    public void setI18n(I18N i18n) {
+        this.i18n = i18n;
     }
     
 }
