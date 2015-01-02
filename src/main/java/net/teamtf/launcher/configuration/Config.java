@@ -3,7 +3,9 @@ package net.teamtf.launcher.configuration;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+
 import net.teamtf.launcher.core.Engine;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -42,6 +44,7 @@ public class Config {
         this.saveToFile();
     }
 
+    @SuppressWarnings("unchecked")
     public Config(String configFilePath) {
         this.configLogSystem = LogFactory.getLog("CONFIG");
         try {
@@ -66,7 +69,7 @@ public class Config {
             }
         } catch (Exception e) {
             this.configLogSystem.fatal("Can not pass config file.", e);
-            System.exit(0);
+            System.exit(-1);
         }
 
     }

@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import java.net.MalformedURLException;
 
 import net.teamtf.launcher.configuration.Config;
+import net.teamtf.launcher.localization.DefaultI18n;
 
 /**
  * @Author Decker
@@ -18,7 +19,7 @@ public class Engine {
     
     private static Engine instance;
     
-    public static void initEngine() throws ClassNotFoundException, MalformedURLException, InstantiationException, IllegalAccessException {
+    public static void initEngine() throws Exception {
         if (instance == null) {
             instance = new Engine();
         } else {
@@ -33,13 +34,14 @@ public class Engine {
     private final Log logger;
     private UIController uiController;
     private Launcher launcher;
-    private I18N i18n;
+    private I18n i18n;
     private final AddonLoader addonLoader;
     private final Config configuration;
     
-    Engine() throws ClassNotFoundException, MalformedURLException, InstantiationException, IllegalAccessException {
+    private Engine() throws Exception {
         this.logger = LogFactory.getLog("MainLogger");
         this.configuration = new Config("config.yml");
+        this.i18n = new DefaultI18n();
         this.uiController = new DefaultUIControler();
         this.launcher = new DefaultLauncher();
         
@@ -97,8 +99,7 @@ public class Engine {
         return configuration;
     }
     
-    public void stop()
-    {
+    public void stop() {
         this.uiController.closeAddWindow();
     }
 
@@ -112,14 +113,14 @@ public class Engine {
     /**
      * @return the i18n
      */
-    public I18N getI18n() {
+    public I18n getI18n() {
         return i18n;
     }
 
     /**
      * @param i18n the i18n to set
      */
-    public void setI18n(I18N i18n) {
+    public void setI18n(I18n i18n) {
         this.i18n = i18n;
     }
     
