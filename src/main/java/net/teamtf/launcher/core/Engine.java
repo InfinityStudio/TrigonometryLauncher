@@ -100,7 +100,7 @@ public class Engine {
     }
     
     public void stop() {
-        this.uiController.closeAddWindow();
+        this.uiController.closeAllWindow();
     }
 
     /**

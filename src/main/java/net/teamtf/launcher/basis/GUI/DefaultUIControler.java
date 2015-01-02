@@ -47,7 +47,7 @@ public class DefaultUIControler implements UIController {
     }
 
     @Override
-    public void closeAddWindow() {
+    public void closeAllWindow() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -12,5 +12,6 @@ public interface UIController {
     public Window getMainWindow();
     public Dialog getConfigDialog();
     public Dialog getAuthDialog();
-    public void closeAddWindow();
+    
+    public void closeAllWindow();
 }
