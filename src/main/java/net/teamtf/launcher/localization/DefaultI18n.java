@@ -42,7 +42,7 @@ public class DefaultI18n implements I18n {
 	if(stream == null) {
 	    Engine.getEngine().getLogger().warn("Unsupported language \'" + langFileName
 		    + "\', trying to set as default.");
-	    stream = clazz.getResourceAsStream("/lang/" + defaultLangFileName + ".lang");
+	    stream = clazz.getResourceAsStream(path + "/" + defaultLangFileName + ".lang");
 	}
 	this.loadFromInputstream(stream);
     }
