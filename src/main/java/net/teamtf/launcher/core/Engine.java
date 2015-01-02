@@ -100,5 +100,12 @@ public class Engine {
     {
         this.uiController.closeAddWindow();
     }
+
+    /**
+     * @param uiController the uiController to set
+     */
+    public void setUiController(UIController uiController) {
+        this.uiController = uiController;
+    }
     
 }
