@@ -8,7 +8,7 @@ public interface I18n {
     /**
      * Import the language data to the map
      * 
-     * @param clazz any class is OK
+     * @param clazz any class of the addon is OK
      * @param path the path of the folder what the language-files in it
      */
     public void importLanguageData(Class<? extends Object> clazz, String path);
