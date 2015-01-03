@@ -15,7 +15,12 @@
         <system>jenkins</system>
         <url>http://ci.exz.me</url>
     </ciManagement>
-    <dependencies>        
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>1.7.1</version>
+        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
