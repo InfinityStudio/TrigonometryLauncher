@@ -11,6 +11,7 @@ package net.teamtf.launcher;
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println("--------This is just a test--------");
+        System.out.println("GOD said: do not commit this file without authorisation.");
+        System.out.println("\"And so I tell you, every kind of sin and slander can be forgiven, but blasphemy against the Spirit will not be forgiven.\"-- Matthew 12:31");
     }
 }
