@@ -1,8 +1,5 @@
 package net.teamtf.launcher.core;
 
-import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.teamtf.launcher.util.task.TaskManager;
 import net.teamtf.launcher.util.task.TaskUtil;
 
@@ -21,7 +18,7 @@ public class EngineInitializeTaskManager extends TaskManager{
                 try {
                     Engine.getEngine().getAddonLoader().loadFilesFromFolder();
                 } catch (Exception ex) {
-                    System.exit(0);
+                    System.exit(-1);
                 } 
             }
         });

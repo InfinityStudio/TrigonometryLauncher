@@ -11,6 +11,6 @@ package net.teamtf.launcher;
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println("This is just a test");
+        System.out.println("--------This is just a test--------");
     }
 }

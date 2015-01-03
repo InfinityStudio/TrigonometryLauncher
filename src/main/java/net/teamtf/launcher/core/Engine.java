@@ -7,8 +7,6 @@ import net.teamtf.launcher.basis.DefaultLauncher;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.net.MalformedURLException;
-
 import net.teamtf.launcher.configuration.Config;
 import net.teamtf.launcher.localization.DefaultI18n;
 
