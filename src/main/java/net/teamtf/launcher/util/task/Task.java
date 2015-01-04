@@ -6,4 +6,6 @@ package net.teamtf.launcher.util.task;
  */
 public interface Task extends Runnable {
     public String getName();
+    public Boolean isSynchronized();
+    public Boolean isSuccessfullyExecuted();
 }

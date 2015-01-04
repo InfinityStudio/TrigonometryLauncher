@@ -28,12 +28,13 @@ public class TaskManager {
         ExecutorService asyncPool = Executors.newCachedThreadPool();
 
         for (Task task : reversedList) {
-            if (task instanceof SynchronizedTask) {
+            if (task.isSynchronized()) {
                 syncPool.execute(task);
-            } else if (task instanceof AsynchronizedTask) {
-                asyncPool.execute(task);
+                if (!task.isSuccessfullyExecuted()) {
+                    throw new TaskExecuteException(task);
+                }
             } else {
-                continue;
+                asyncPool.execute(task);
             }
         }
         syncPool.shutdown();
