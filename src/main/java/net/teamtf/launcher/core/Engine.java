@@ -1,6 +1,6 @@
 package net.teamtf.launcher.core;
 
-import net.teamtf.launcher.basis.gui.DefaultUIControler;
+import net.teamtf.launcher.basis.GUI.DefaultUIControler;
 import net.teamtf.launcher.addon.AddonLoader;
 import net.teamtf.launcher.basis.DefaultLauncher;
 

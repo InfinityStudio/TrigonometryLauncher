@@ -1,7 +1,7 @@
 package net.teamtf.launcher.core;
 
 import net.teamtf.launcher.util.task.TaskManager;
-import net.teamtf.launcher.util.task.TaskUtil;
+import net.teamtf.launcher.util.task.TaskUtils;
 
 /**
  *
@@ -11,7 +11,7 @@ public class EngineInitializeTaskManager extends TaskManager{
 
     public EngineInitializeTaskManager() {
         super();
-        TaskUtil.appendSyncTask(this, "LoadAddonsFile", new Runnable() {
+        TaskUtils.appendSyncTask(this, "LoadAddonsFile", new Runnable() {
 
             @Override
             public void run()  {
