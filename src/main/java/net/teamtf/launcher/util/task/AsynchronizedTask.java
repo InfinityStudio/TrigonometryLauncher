@@ -4,27 +4,29 @@ package net.teamtf.launcher.util.task;
  *
  * @author decker
  */
-public abstract class AsynchronizedTask implements Task{
+public abstract class AsynchronizedTask implements Task {
 
-    protected Boolean successfullyExecuted;
+    protected TaskExecuteException exceptionDuringExecuting;
 
     public AsynchronizedTask() {
-        this.successfullyExecuted=false;
+
     }
-     
+
     @Override
     public abstract void run();
-    
+
     @Override
-    public Boolean isSynchronized()
-    {
+    public Boolean isSynchronized() {
         return false;
     }
-    
+
     @Override
-    public Boolean isSuccessfullyExecuted()
-    {
-        return this.successfullyExecuted;
+    public TaskExecuteException getTaskExecuteException() {
+        return this.exceptionDuringExecuting;
     }
-    
+
+    protected void setTaskExecuteException(Exception exception) {
+        this.exceptionDuringExecuting = new TaskExecuteException(this, exception);
+    }
+
 }

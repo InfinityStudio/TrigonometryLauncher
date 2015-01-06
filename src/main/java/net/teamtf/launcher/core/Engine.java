@@ -3,12 +3,12 @@ package net.teamtf.launcher.core;
 import net.teamtf.launcher.basis.GUI.DefaultUIControler;
 import net.teamtf.launcher.addon.AddonLoader;
 import net.teamtf.launcher.basis.DefaultLauncher;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import net.teamtf.launcher.configuration.Config;
 import net.teamtf.launcher.localization.DefaultI18n;
+import net.teamtf.launcher.localization.I18n;
 
 /**
  * @Author Decker

@@ -8,7 +8,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.teamtf.launcher.core.Engine;
-import net.teamtf.launcher.core.I18n;
 import net.teamtf.launcher.util.Util;
 
 import org.apache.commons.io.IOUtils;

@@ -30,8 +30,8 @@ public class TaskManager {
         for (Task task : reversedList) {
             if (task.isSynchronized()) {
                 syncPool.execute(task);
-                if (!task.isSuccessfullyExecuted()) {
-                    throw new TaskExecuteException(task);
+                if (task.getTaskExecuteException()!=null) {
+                    throw task.getTaskExecuteException();
                 }
             } else {
                 asyncPool.execute(task);

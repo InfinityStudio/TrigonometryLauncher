@@ -6,10 +6,10 @@ package net.teamtf.launcher.util.task;
  */
 public abstract class SynchronizedTask implements Task {
 
-    protected Boolean successfullyExecuted;
+    private TaskExecuteException exceptionDuringExecuting;
 
     public SynchronizedTask() {
-        this.successfullyExecuted = false;
+
     }
 
     @Override
@@ -21,7 +21,12 @@ public abstract class SynchronizedTask implements Task {
     }
 
     @Override
-    public Boolean isSuccessfullyExecuted() {
-        return this.successfullyExecuted;
+    public TaskExecuteException getTaskExecuteException() {
+        return this.exceptionDuringExecuting;
+    }
+    
+       
+    protected void setTaskExecuteException(Exception exception) {
+       this.exceptionDuringExecuting=new TaskExecuteException(this, exception);
     }
 }
