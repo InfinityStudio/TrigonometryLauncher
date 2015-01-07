@@ -1,6 +1,7 @@
 package net.teamtf.launcher.core;
 
 import java.io.File;
+import java.net.URLDecoder;
 import net.teamtf.launcher.basis.GUI.DefaultUIControler;
 import net.teamtf.launcher.addon.AddonLoader;
 import net.teamtf.launcher.basis.DefaultLauncher;
@@ -16,9 +17,9 @@ import org.apache.commons.io.FileUtils;
  * @Author Decker
  */
 public class Engine {
-
+    
     private static Engine instance;
-
+    
     public static void initEngine() throws Exception {
         if (instance == null) {
             instance = new Engine();
@@ -26,30 +27,33 @@ public class Engine {
             throw new IllegalAccessException("Engine has already initialized");
         }
     }
-
+    
     public static Engine getEngine() {
         return instance;
     }
-
+    
     private final File gameDir;
+    private final File launcherDir;
     private final Log logger;
     private UIController uiController;
     private Launcher launcher;
     private I18n i18n;
     private final AddonLoader addonLoader;
     private final Config configuration;
-
+    
     private Engine() throws Exception {
+        this.launcherDir = new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8")).getParentFile().getCanonicalPath());
+        
         this.logger = LogFactory.getLog("MainLogger");
-        this.configuration = new Config("config.yml");
-
+        this.configuration = new Config(FileUtils.getFile(this.launcherDir, "config.yml"));
+        
         this.gameDir = FileUtils.getFile(this.configuration.getConfig("game_dir"));
         this.i18n = new DefaultI18n();
         this.uiController = new DefaultUIControler();
         this.launcher = new DefaultLauncher();
-
+        
         this.addonLoader = new AddonLoader(this.configuration.getConfig("addonfolder"));
-
+        
     }
 
     /**
@@ -67,13 +71,13 @@ public class Engine {
         this.addonLoader.loadAllAddons();
         this.uiController.getMainWindow().setVisible(true);
         this.addonLoader.postLoadAllAddons();
-
+        
     }
-
+    
     public Log getLogger() {
         return logger;
     }
-
+    
     public UIController getUIController() {
         return this.uiController;
     }
@@ -86,11 +90,11 @@ public class Engine {
     public Launcher getLauncher() {
         return launcher;
     }
-
+    
     public void setLauncher(Launcher launcher) {
         this.launcher = launcher;
     }
-
+    
     public AddonLoader getAddonLoader() {
         return addonLoader;
     }
@@ -101,7 +105,7 @@ public class Engine {
     public Config getEngineConfig() {
         return configuration;
     }
-
+    
     public void stop() {
         this.uiController.closeAllWindow();
     }
@@ -133,5 +137,5 @@ public class Engine {
     public File getGameDir() {
         return gameDir;
     }
-
+    
 }
