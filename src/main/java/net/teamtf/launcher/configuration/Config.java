@@ -38,21 +38,17 @@ public class Config {
         }
         return res;
     }
-    public void setConfig(String key,String value)
-    {
+
+    public void setConfig(String key, String value) {
         this.config.put(key, value);
         this.saveToFile();
     }
 
     @SuppressWarnings("unchecked")
-    public Config(String configFilePath) {
+    public Config(File configFile) {
         this.configLogSystem = LogFactory.getLog("CONFIG");
         try {
-            //I do not know which implementation is better. 
-            //But, by following the principle of Occam's Razor, I would using simple one.
-            //If exception occurs at here, replace by next implementation.
-            configFile = new File(configFilePath);
-            //configFile = new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8")).getParentFile().getCanonicalPath()).toPath().resolve(configFilePath).toFile();
+            this.configFile = configFile;
 
             if (!configFile.exists()) {
                 configFile.createNewFile();
