@@ -1,5 +1,6 @@
 package net.teamtf.launcher.util;
 
+import com.google.gson.Gson;
 import java.io.File;
 import net.teamtf.launcher.provider.VersionProvider;
 
@@ -13,9 +14,13 @@ public class VersionUtils {
         //TODO:Implement this method
         return null;
     }
-    
-    public static void registerVersion()
-    {
-        
+
+    public static void registerVersion(File jarFile, File jsonFile) {
+        //  Gson g=new Gson();
+        //g.
+    }
+
+    public static void registerVersion(File jarFile, Gson jsonConfig) {
+
     }
 }

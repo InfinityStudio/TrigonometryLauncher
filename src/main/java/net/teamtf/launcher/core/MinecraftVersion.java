@@ -8,14 +8,4 @@ import java.io.File;
  */
 public class MinecraftVersion {
 
-    private String versionValue;
-
-    public File[] getLibraryFiles() {
-        return null;
-    }
-
-    public String[] getLibraryFilePathes() {
-        return null;
-    }
-
 }
