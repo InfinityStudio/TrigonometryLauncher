@@ -29,16 +29,16 @@ public class LibraryProvider {
     
     private HashMap<String, Library> libraryQuery;
     private File libraryFolder;
-    private String repoUrl;
+    private URL repoUrl;
 
-    public LibraryProvider(File libraryFolder, String repoUrl) throws IOException {
+    public LibraryProvider(File libraryFolder, URL repoUrl) throws IOException {
         this.libraryQuery = new HashMap<>();
         this.libraryFolder = libraryFolder;
         this.repoUrl = repoUrl;
         //Try to download the latest version of librepo.json
         try {
             //Files.deleteIfExists(FileUtils.getFile(libraryFolder, "librepo.json").toPath());
-            DownloadUtils.downloadToFile(new URL(repoUrl), FileUtils.getFile(libraryFolder, "librepo.json"));
+            DownloadUtils.downloadToFile(repoUrl, FileUtils.getFile(libraryFolder, "librepo.json"));
         } catch (Exception e) {
             logger.warn(String.format("LibProvider:Can not fetch repo.json form %s", repoUrl));
         }
@@ -58,9 +58,9 @@ public class LibraryProvider {
             Path inferPath = LibraryUtils.resolveLibPath(libraryFolder, groupId, artifactId, version);
             Library l;
             if (inferPath.toFile().exists()) {
-                l = new Library(groupId, url, version, repoUrl, inferPath.toFile());
+                l = new Library(groupId, artifactId, version, url, inferPath.toFile());
             } else {
-                l = new Library(groupId, url, version, repoUrl, null);
+                l = new Library(groupId, artifactId, version, url, null);
             }
             this.libraryQuery.put(String.format("%s:%s:%s", groupId, artifactId, version), l);
 
