@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -70,17 +69,15 @@ public class Config {
                 FileUtils.deleteQuietly(configFile);
                 InputStream config = getClass().getClassLoader().getResourceAsStream("defaults/config.yml");
                 FileUtils.copyInputStreamToFile(config, configFile);
-            } else {
-                String fileContent = FileUtils.readFileToString(configFile);
-                Object o = new Yaml().load(fileContent);
-                if (!(o instanceof HashMap)) {
-                    throw new IOException("Invalid file format. Please check your file format through http://www.yamllint.com/");
-                }
-                this.config = (HashMap<String, String>) (new Yaml().load(fileContent));
-                if (this.config == null) {
-                    this.config = new HashMap<>();
-                }
             }
+
+            String fileContent = FileUtils.readFileToString(configFile);
+            Object o = new Yaml().load(fileContent);
+            this.config = (HashMap<String, String>) (new Yaml().load(fileContent));
+            if (this.config == null) {
+                this.config = new HashMap<>();
+            }
+
         } catch (Exception e) {
             this.configLogSystem.fatal("Can not pass config file.", e);
             System.exit(-1);
