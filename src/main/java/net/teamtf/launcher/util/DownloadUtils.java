@@ -1,9 +1,13 @@
 package net.teamtf.launcher.util;
 
+import net.teamtf.launcher.content.FileContent;
+
 import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,16 +16,12 @@ import org.apache.commons.logging.LogFactory;
  * @since 2015/1/5
  */
 public class DownloadUtils {
-
-    public static Log logger = LogFactory.getLog(DownloadUtils.class);
-
-    public static void downloadToFile(String url, String filename) throws IOException {
-        downloadToFile(new URL(url), new File(filename));
-
-    }
-
-    public static void downloadToFile(URL url, File file) throws IOException {
-        logger.info("Downloading " + url + " to " + file);
-        FileUtils.copyURLToFile(url, file);
+    public static void downloadToFile(String url, File file) throws IOException {
+	//WARNING: This file is now imaginary, rebuild it when the FileSystem finished
+	File tempdirectory = new File("appdata/roaming/.tflauncher/temp/" + RandomUtils.nextString(FileContent.TEMP_FILE_NAME_MAX_LENGTH));
+	
+	File path = new File(tempdirectory.getAbsolutePath() + "/" + file.getName());
+	FileUtils.copyURLToFile(new URL(url), path);
+	FileUtils.moveFile(path, file);
     }
 }

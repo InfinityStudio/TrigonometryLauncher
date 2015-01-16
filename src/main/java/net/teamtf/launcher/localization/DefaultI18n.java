@@ -17,13 +17,15 @@ import org.apache.commons.io.IOUtils;
  * @author Darkyoooooo
  */
 public class DefaultI18n implements I18n {
-    private final Map<String, Map<String, String>> map = new HashMap<String, Map<String, String>>();
-    private final Locale locale = Locale.getDefault();
-    private final String defaultLangFileName = "zh_CN";
-    private String langFileName;
+    private final Map<String, Map<String, String>> map;
+    private final Locale locale;
+    private final String defaultLangFileName;
     
     public DefaultI18n() {
-	this.langFileName = locale.toString();
+	this.map = new HashMap<String, Map<String, String>>();
+	this.locale = Locale.getDefault();
+	this.defaultLangFileName = "zh_CN";
+	
 	this.importLanguageData(this.getClass(), "/lang/", locale.toString());
     }
     
@@ -31,21 +33,18 @@ public class DefaultI18n implements I18n {
      * Import the language data to the map
      * 
      * @param clazz any class of the addon is OK
-     * @param path the path of the folder what the language-files in it
+     * @param path the path of the folder what the language-files in it (MUST START WITH '/')
      */
     @Override
     public void importLanguageData(Class<? extends Object> clazz, String path, String locale) {
-	if(!path.startsWith("/")) {
-	    path = "/" + path;
-	}
-	InputStream stream = clazz.getResourceAsStream(path + "/" + langFileName + ".lang");
+	InputStream stream = clazz.getResourceAsStream(path + "/" + locale + ".lang");
 	if(stream == null) {
-	    Engine.getEngine().getLogger().warn("Unsupported language \'" + langFileName
+	    Engine.getEngine().getLogger().warn("Unsupported language \'" + locale
 		    + "\', trying to set as defaults.");
-	    langFileName = defaultLangFileName;
-	    stream = clazz.getResourceAsStream(path + "/" + langFileName + ".lang");
+	    locale = this.defaultLangFileName;
+	    stream = clazz.getResourceAsStream(path + "/" + locale + ".lang");
 	}
-	this.loadFromInputstream(stream, locale.toString());
+	this.loadFromInputstream(stream, locale);
     }
     
     /**
@@ -75,7 +74,7 @@ public class DefaultI18n implements I18n {
     }
     
     /**
-     * Import a language-data-map to the map
+     * Import a language-data-map to the map by current locale 
      * 
      * @param map the language-data-map
      */
@@ -86,7 +85,8 @@ public class DefaultI18n implements I18n {
     
     private void loadFromInputstream(InputStream stream, String locale) {
 	if(stream == null) {
-	    throw new RuntimeException("Missing language-file, it should not be happened, contact the author!");
+	    throw new RuntimeException("Missing language-file, it should not be happened, "
+	    	+ "contact the author!");
 	}
 	try {
 	    Map<String, String> temp = new HashMap<String, String>();
@@ -120,7 +120,7 @@ public class DefaultI18n implements I18n {
      */
     @Override
     public String getTranslation(String key) {
-	String string = map.get(this.langFileName).get(key);
+	String string = map.get(this.locale.toString()).get(key);
 	return string == null ? key : string;
     }
     
@@ -135,5 +135,15 @@ public class DefaultI18n implements I18n {
     public String getTranslationByLocale(String key, String locale) {
 	String string = map.get(locale) == null ? null : map.get(locale).get(key);
 	return string == null ? key : string;
+    }
+
+    /**
+     * Get the current locale
+     * 
+     * @return the instance of current locale
+     */
+    @Override
+    public Locale getCurrentLocale() {
+	return this.locale;
     }
 }

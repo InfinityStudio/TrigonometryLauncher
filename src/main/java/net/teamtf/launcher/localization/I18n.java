@@ -1,5 +1,6 @@
 package net.teamtf.launcher.localization;
 
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -33,7 +34,7 @@ public interface I18n {
     public void importLaunguaeDataByMap(Map<String, String> map, String locale);
     
     /**
-     * Import a language-data-map to the map
+     * Import a language-data-map to the map by current locale 
      * 
      * @param map the language-data-map
      */
@@ -55,4 +56,11 @@ public interface I18n {
      * @return the localized string (if it is missing, will return the key)
      */
     public String getTranslationByLocale(String key, String locale);
+    
+    /**
+     * Get the current locale
+     * 
+     * @return the instance of current locale
+     */
+    public Locale getCurrentLocale();
 }
