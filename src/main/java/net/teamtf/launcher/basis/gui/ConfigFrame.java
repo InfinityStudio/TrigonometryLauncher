@@ -1,4 +1,4 @@
-package net.teamtf.launcher.basis.gui;
+package net.teamtf.launcher.basis.GUI;
 
 /**
  *
