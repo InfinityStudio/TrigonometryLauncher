@@ -4,6 +4,7 @@ TrigonometryLauncher
 A Minecraft Launcher.
 
 Website: [trigonometry-f main page](http://trigonometry-f.github.io/)
+
 Bugs/Suggestions: [Project Issue](https://github.com/Trigonometry-F/TrigonometryLauncher/issues)
 
 Compilation

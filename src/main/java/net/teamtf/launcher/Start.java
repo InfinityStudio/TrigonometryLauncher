@@ -1,7 +1,7 @@
 package net.teamtf.launcher;
 
 import net.teamtf.launcher.core.Engine;
-import net.teamtf.launcher.util.DownloadUtil;
+import net.teamtf.launcher.util.DownloadUtils;
 
 /**
  *
@@ -12,7 +12,5 @@ public class Start {
         Engine.initEngine();
         Engine engine=Engine.getEngine();
         engine.start();
-        DownloadUtil thread = new DownloadUtil();
-        thread.start();
     }
 }

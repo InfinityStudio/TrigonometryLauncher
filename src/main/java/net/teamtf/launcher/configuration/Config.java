@@ -28,7 +28,7 @@ public class Config {
             String stringToFile = new Yaml().dump(this.config);
             FileUtils.writeStringToFile(configFile, stringToFile);
         } catch (Exception e) {
-            Engine.getEngine().getLogger().error("Can not write config to file.", e);
+            configLogSystem.error("Can not write config to file.", e);
         }
     }
 

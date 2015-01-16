@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.teamtf.launcher.core.Engine;
-import net.teamtf.launcher.util.Util;
+import net.teamtf.launcher.util.MapUtils;
 
 import org.apache.commons.io.IOUtils;
 
@@ -41,7 +41,7 @@ public class DefaultI18n implements I18n {
 	InputStream stream = clazz.getResourceAsStream(path + "/" + langFileName + ".lang");
 	if(stream == null) {
 	    Engine.getEngine().getLogger().warn("Unsupported language \'" + langFileName
-		    + "\', trying to set as default.");
+		    + "\', trying to set as defaults.");
 	    langFileName = defaultLangFileName;
 	    stream = clazz.getResourceAsStream(path + "/" + langFileName + ".lang");
 	}
@@ -70,7 +70,7 @@ public class DefaultI18n implements I18n {
 	if(this.map.get(locale) == null) {
 	    this.map.put(locale, map);
 	} else {
-	    Util.addMapToMap(map, this.map.get(locale));
+	    MapUtils.addMapToMap(map, this.map.get(locale));
 	}
     }
     
@@ -105,7 +105,7 @@ public class DefaultI18n implements I18n {
 	    if(map.get(locale) == null) {
 		map.put(locale, temp);
 	    } else {
-		Util.addMapToMap(temp, map.get(locale));
+		MapUtils.addMapToMap(temp, map.get(locale));
 	    }
 	} catch (IOException e) {
 	    ;

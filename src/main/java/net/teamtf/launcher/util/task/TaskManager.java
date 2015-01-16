@@ -27,10 +27,11 @@ public class TaskManager {
         ExecutorService syncPool = Executors.newSingleThreadExecutor();
         ExecutorService asyncPool = Executors.newCachedThreadPool();
 
+
         for (Task task : reversedList) {
             if (task.isSynchronized()) {
                 syncPool.execute(task);
-                if (task.getTaskExecuteException()!=null) {
+                if (task.getTaskExecuteException() != null) {
                     throw task.getTaskExecuteException();
                 }
             } else {
@@ -55,7 +56,7 @@ public class TaskManager {
      * Insert task at certain index of task list
      *
      * @param index the sequence you want your task execute
-     * @param task the task which you want insert
+     * @param task  the task which you want insert
      */
     public void insertTask(Integer index, Task task) {
         this.tasks.add(index, task);

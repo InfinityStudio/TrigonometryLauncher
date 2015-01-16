@@ -2,7 +2,7 @@ package net.teamtf.launcher.util;
 
 import com.google.gson.Gson;
 import java.io.File;
-import net.teamtf.launcher.provider.VersionProvider;
+import net.teamtf.launcher.provider.version.VersionProvider;
 
 /**
  *
