@@ -43,7 +43,7 @@ public class LibraryProvider {
         //Try to download the latest version of librepo.json
         try {
             //Files.deleteIfExists(FileUtils.getFile(libraryFolder, "librepo.json").toPath());
-            DownloadUtils.downloadToFile(repoUrl, FileUtils.getFile(libraryFolder, "librepo.json"));
+            DownloadUtils.downloadToFile(repoUrl.toString(), FileUtils.getFile(libraryFolder, "librepo.json"));
         } catch (Exception e) {
             logger.warn(String.format("LibProvider:Can not fetch repo.json form %s", repoUrl));
         }
@@ -87,7 +87,7 @@ public class LibraryProvider {
                             this.libraryQuery.get(libString).getGroupID(),
                             this.libraryQuery.get(libString).getName(),
                             this.libraryQuery.get(libString).getVersion()
-                    ).toString()
+                    ).toFile()
             );
         }
         return this.libraryQuery.get(libString).getLibFile();
