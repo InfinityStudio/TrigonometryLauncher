@@ -9,12 +9,16 @@ public class FileContent {
 	"萌萌萌"
     };
     public static final String[] CRASHREPORTS_TEMPLET = {
-	"~~~Trigonometry Launcher - Crash Report~~~",
-	"//${ANNOTATION}",
+	"--- Trigonometry Launcher - Crash Report ---",
+	"// ${ANNOTATION}",
 	"",
 	"Time: ${TIME}",
 	"Description: ${DESCRIPTION}",
 	"",
-	"${EXCEPTION_TEXT}"
+	"${EXCEPTION_TITLE}",
+	"${EXCEPTION_TEXT}",
+	"",
+	"-----------------------------------------------------------------------------",
+	"${MESSAGE}"
     };
 }

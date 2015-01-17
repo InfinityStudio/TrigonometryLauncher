@@ -35,12 +35,17 @@ public class CrashReporter {
 	        buffer.append(StringUtils.replace(line, "${TIME}", Utils.getCurrentFullyTime()));
 	    } else if(line.contains("${DESCRIPTION}")) {
 	        buffer.append(StringUtils.replace(line, "${DESCRIPTION}", this.description));
+	    } else if(line.contains("${EXCEPTION_TITLE}")) {
+		buffer.append(StringUtils.replace(line, "${EXCEPTION_TITLE}", this.throwable.toString()));
 	    } else if(line.contains("${EXCEPTION_TEXT}")) {
 		StringBuffer buffer2 = new StringBuffer("");
 		for(StackTraceElement element : this.throwable.getStackTrace()) {
-		    buffer2.append(element.toString());
+		    buffer2.append("\tat " + element.toString());
 		}
 		buffer.append(StringUtils.replace(line, "${EXCEPTION_TEXT}", buffer2.toString()));
+	    } else if(line.contains("${MESSAGE}")) {
+		buffer.append(StringUtils.replace(line, "${MESSAGE}",
+			Engine.getEngine().getI18n().getTranslation("tflauncher.statistics.crashreporter.message")));
 	    } else {
 		buffer.append(line);
 	    }
