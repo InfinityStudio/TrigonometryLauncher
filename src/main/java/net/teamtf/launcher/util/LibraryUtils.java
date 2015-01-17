@@ -3,7 +3,6 @@ package net.teamtf.launcher.util;
 import java.io.File;
 import java.nio.file.Path;
 
-import net.teamtf.launcher.core.Library;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 

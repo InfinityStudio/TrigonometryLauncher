@@ -9,7 +9,6 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.HashMap;
 
-import net.teamtf.launcher.core.Library;
 import net.teamtf.launcher.util.DownloadUtils;
 import net.teamtf.launcher.util.LibraryUtils;
 import org.apache.commons.io.FileUtils;

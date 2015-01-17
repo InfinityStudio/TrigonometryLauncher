@@ -1,4 +1,4 @@
-package net.teamtf.launcher.core;
+package net.teamtf.launcher.provider.version;
 
 import java.io.File;
 
