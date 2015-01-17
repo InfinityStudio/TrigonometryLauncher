@@ -41,10 +41,11 @@ public class DefaultI18n implements I18n {
 	if(stream == null) {
 	    Engine.getEngine().getLogger().warn("Unsupported language \'" + locale
 		    + "\', trying to set as defaults.");
-	    locale = this.defaultLangFileName;
-	    stream = clazz.getResourceAsStream(path + "/" + locale + ".lang");
+	    stream = clazz.getResourceAsStream(path + "/" + defaultLangFileName + ".lang");
+	    this.loadFromInputstream(stream, defaultLangFileName);
+	} else {
+	    this.loadFromInputstream(stream, locale);
 	}
-	this.loadFromInputstream(stream, locale);
     }
     
     /**
@@ -83,6 +84,12 @@ public class DefaultI18n implements I18n {
 	this.importLaunguaeDataByMap(map, locale.toString());
     }
     
+    /**
+     * Load lang-file from an InputStream
+     * 
+     * @param stream the InputStream
+     * @param locale the locale
+     */
     private void loadFromInputstream(InputStream stream, String locale) {
 	if(stream == null) {
 	    throw new RuntimeException("Missing language-file, it should not be happened, "
@@ -97,7 +104,7 @@ public class DefaultI18n implements I18n {
 		}
 		try {
 		    String[] elements = line.split("=", 2);
-		    temp.put(elements[0], elements[1]);
+		    temp.put(elements[0].trim(), elements[1].trim());
 		} catch (Exception ex) {
 		    ;
 		}

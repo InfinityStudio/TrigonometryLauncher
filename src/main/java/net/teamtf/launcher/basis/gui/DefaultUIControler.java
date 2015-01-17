@@ -1,4 +1,4 @@
-package net.teamtf.launcher.basis.GUI;
+package net.teamtf.launcher.basis.gui;
 
 import java.awt.EventQueue;
 import java.lang.reflect.InvocationTargetException;
