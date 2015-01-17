@@ -20,8 +20,7 @@ import org.apache.commons.io.FileUtils;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        Config config=new Config(FileUtils.getFile("config.yml"));
-        config.setConfig("launcher_dir",new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8")).getParentFile().getCanonicalPath()).toString());
-        System.out.println(config.getConfig("native"));
+        System.out.println("GOD said: do not commit this file without authorisation.");
+        System.out.println("\"And so I tell you, every kind of sin and slander can be forgiven, but blasphemy against the Spirit will not be forgiven.\"-- Matthew 12:31");
     }
 }
