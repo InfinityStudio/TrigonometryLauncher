@@ -18,10 +18,9 @@ public class TLFileSystem {
                        tempDir,
                        crashreportsDir,
                        logDir;
-    private final String username;
+    private String username;
     
-    public TLFileSystem(String username) {
-	this.username = username;
+    public TLFileSystem() {
 	String userHomeDir = System.getProperty("user.home", ".");
 	String filename = ".tflauncher";
 	OSType type = OSUtils.getCurrentOSType();
@@ -47,6 +46,15 @@ public class TLFileSystem {
     }
     
     /**
+     * Set the username
+     * 
+     * @param username the username
+     */
+    public void setUsername(String username) {
+	this.username = username;
+    }
+    
+    /**
      * Get the parent config file
      * 
      * @return the parent config file
@@ -56,7 +64,7 @@ public class TLFileSystem {
     }
     
     /**
-     * Get user directory
+     * Get user directory (WARNING: MUST SET THE USERNAME BEFORE CALL THIS FUNCTION!)
      * 
      * @return the user directory
      */

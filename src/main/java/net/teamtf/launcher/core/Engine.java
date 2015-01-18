@@ -57,18 +57,20 @@ public class Engine {
         	"UTF-8")).getParentFile().getCanonicalPath());
 
         this.logger = LogFactory.getLog("MainLogger");
-        this.fileSystem = new TLFileSystem("Read this.fileSystem.getParentConfig() to get the username!");
+        this.fileSystem = new TLFileSystem();
         
         this.configuration = new Config(this.fileSystem.getParentConfigFile());
         this.configuration.setConfig("launcher.dir", this.launcherDir.toString());
-
+        this.fileSystem.setUsername(this.configuration.getConfig("user.name"));
+        
         this.gameDir = FileUtils.getFile(this.configuration.getConfig("game.dir"));
         this.i18n = new DefaultI18n();
+        this.logger.info(this.i18n.getTranslation("lang.welcome"));
+        
         this.uiController = new DefaultUIControler();
         this.launcher = new DefaultLauncher();
 
         this.addonLoader = new AddonLoader(this.configuration.getConfig("addon.dir"));
-
     }
 
     /**

@@ -52,7 +52,7 @@ public final class AddonLoader {
                 JarFile addonFile = new JarFile(listFile);
                 String mainClass = addonFile.getManifest().getMainAttributes().getValue("Addon-Class");
                 if (StringUtils.isEmpty(mainClass)) {
-                    Engine.getEngine().getLogger().error(String.format("No declared Addon-Class found in MANIFEST.MF in%s. Load gave up.", listFile.getPath()));
+                    Engine.getEngine().getLogger().error(String.format("No declared Addon-Class found in MANIFEST.MF in \'%s\'. Load gave up.", listFile.getPath()));
                 }
                 URLClassLoader loader = new URLClassLoader(new URL[]{listFile.toURI().toURL()});
                 Class addonClass = loader.loadClass(mainClass);
