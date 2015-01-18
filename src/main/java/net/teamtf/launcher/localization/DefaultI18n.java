@@ -89,6 +89,7 @@ public class DefaultI18n implements I18n {
      * 
      * @param stream the InputStream
      * @param locale the locale
+     * @throws RuntimeException when the InputStream is null
      */
     private void loadFromInputstream(InputStream stream, String locale) {
 	if(stream == null) {

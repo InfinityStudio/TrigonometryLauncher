@@ -26,6 +26,11 @@ public class CrashReporter {
 	this.buffer = new StringBuffer("");
     }
     
+    /**
+     * Pack up the data
+     * 
+     * @return the current instance of CrashReporter
+     */
     public CrashReporter pack() {
 	for(String line : FileContent.CRASHREPORTS_TEMPLET) {
 	    if(line.contains("${ANNOTATION}")) {
@@ -54,16 +59,16 @@ public class CrashReporter {
 	return this;
     }
     
+    /**
+     * Save the crash-report file
+     */
     public void save() {
-	//WARNING: This file is now imaginary, rebuild it when the FileSystem finished
-	File file = new File(String.format("AppData/Roaming/.tflauncher/crash-reports/%s.txt",
-		Utils.getCurrentFullyTime().replaceAll(":", "-")));
-        
+        File file = Engine.getEngine().getFileSystem().createNewCrashreportFile();
 	try {
 	    file.createNewFile();
 	    FileUtils.writeStringToFile(file, this.buffer.toString());
 	} catch (IOException e) {
-	    Engine.getEngine().getLogger().error("Could not creat crash-report file!");
+	    Engine.getEngine().getLogger().error("Could not create crash-report file!");
 	}
     }
 }

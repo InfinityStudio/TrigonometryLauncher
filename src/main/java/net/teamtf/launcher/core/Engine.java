@@ -40,6 +40,7 @@ public class Engine {
     private final File gameDir;
     private final File launcherDir;
     private final Log logger;
+    private final TLFileSystem fileSystem;
     private UIController uiController;
     private Launcher launcher;
     private I18n i18n;
@@ -52,18 +53,21 @@ public class Engine {
     private VersionProvider versionProvider;
 
     private Engine() throws Exception {
-        this.launcherDir = new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(), "UTF-8")).getParentFile().getCanonicalPath());
+        this.launcherDir = new File(new File(URLDecoder.decode(Engine.class.getProtectionDomain().getCodeSource().getLocation().getPath(),
+        	"UTF-8")).getParentFile().getCanonicalPath());
 
         this.logger = LogFactory.getLog("MainLogger");
-        this.configuration = new Config(FileUtils.getFile(this.launcherDir, "config.yml"));
-        this.configuration.setConfig("launcher_dir", this.launcherDir.toString());
+        this.fileSystem = new TLFileSystem("Read this.fileSystem.getParentConfig() to get the username!");
+        
+        this.configuration = new Config(this.fileSystem.getParentConfigFile());
+        this.configuration.setConfig("launcher.dir", this.launcherDir.toString());
 
-        this.gameDir = FileUtils.getFile(this.configuration.getConfig("game_dir"));
+        this.gameDir = FileUtils.getFile(this.configuration.getConfig("game.dir"));
         this.i18n = new DefaultI18n();
-        this.setUiController(new DefaultUIControler());
+        this.uiController = new DefaultUIControler();
         this.launcher = new DefaultLauncher();
 
-        this.addonLoader = new AddonLoader(this.configuration.getConfig("addonfolder"));
+        this.addonLoader = new AddonLoader(this.configuration.getConfig("addon.dir"));
 
     }
 
@@ -85,7 +89,11 @@ public class Engine {
     }
 
     public Log getLogger() {
-        return logger;
+        return this.logger;
+    }
+    
+    public TLFileSystem getFileSystem() {
+	return this.fileSystem;
     }
 
     public UIController getUIController() {
