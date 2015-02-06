@@ -1,22 +1,24 @@
 package net.teamtf.launcher.core;
 
+import java.io.File;
+import java.net.URLDecoder;
+
 import net.teamtf.launcher.addon.AddonLoader;
 import net.teamtf.launcher.auth.AuthClient;
 import net.teamtf.launcher.basis.DefaultLauncher;
 import net.teamtf.launcher.basis.gui.DefaultUIControler;
-import net.teamtf.launcher.configuration.Config;
+import net.teamtf.launcher.configuration.Configuration;
+import net.teamtf.launcher.configuration.IConfig;
 import net.teamtf.launcher.localization.DefaultI18n;
 import net.teamtf.launcher.localization.I18n;
 import net.teamtf.launcher.provider.assests.AssestsProvider;
 import net.teamtf.launcher.provider.library.LibraryProvider;
 import net.teamtf.launcher.provider.natives.NativeProvider;
 import net.teamtf.launcher.provider.version.VersionProvider;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.io.File;
-import java.net.URLDecoder;
 
 /**
  * @Author Decker
@@ -45,7 +47,7 @@ public class Engine {
     private Launcher launcher;
     private I18n i18n;
     private final AddonLoader addonLoader;
-    private final Config configuration;
+    private final IConfig launcherConfiguration, gameConfiguration;
     private AuthClient authClient;
     private LibraryProvider libraryProvider;
     private AssestsProvider assestsProvider;
@@ -59,18 +61,18 @@ public class Engine {
         this.logger = LogFactory.getLog("MainLogger");
         this.fileSystem = new TLFileSystem();
         
-        this.configuration = new Config(this.fileSystem.getParentConfigFile());
-        this.configuration.setConfig("launcher.dir", this.launcherDir.toString());
-        this.fileSystem.setUsername(this.configuration.getConfig("user.name"));
+        this.launcherConfiguration = new Configuration(this.fileSystem.getLauncherConfigFile(), "launcherconfig");
+        this.launcherConfiguration.setConfig("launcher.dir", this.launcherDir.getAbsolutePath());
+        this.gameConfiguration = new Configuration(this.fileSystem.getGameConfigFile(), "gameconfig");
         
-        this.gameDir = FileUtils.getFile(this.configuration.getConfig("game.dir"));
+        this.gameDir = FileUtils.getFile(this.launcherConfiguration.getString("game.dir"));
         this.i18n = new DefaultI18n();
         this.logger.info(this.i18n.getTranslation("lang.welcome"));
         
         this.uiController = new DefaultUIControler();
         this.launcher = new DefaultLauncher();
 
-        this.addonLoader = new AddonLoader(this.configuration.getConfig("addon.dir"));
+        this.addonLoader = new AddonLoader(this.launcherConfiguration.getString("addon.dir"));
     }
 
     /**
@@ -120,10 +122,10 @@ public class Engine {
     }
 
     /**
-     * @return the configuration
+     * @return the launcher configuration
      */
-    public Config getEngineConfig() {
-        return configuration;
+    public IConfig getLauncherConfig() {
+        return this.launcherConfiguration;
     }
 
     public void stop() {

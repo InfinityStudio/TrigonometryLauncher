@@ -1,5 +1,6 @@
 ---
-game_dir: "${launcher_dir}/.minecraft"
+game.dir: "${launcher_dir}/.minecraft"
 library: "${game_dir}/libraries"
 native: "${game_dir}/Native"
 assets: "${game_dir}/assets"
+user.name: "player"

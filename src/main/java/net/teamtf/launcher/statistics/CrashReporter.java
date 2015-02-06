@@ -63,7 +63,7 @@ public class CrashReporter {
      * Save the crash-report file
      */
     public void save() {
-        File file = Engine.getEngine().getFileSystem().createNewCrashreportFile();
+        File file = Engine.getEngine().getFileSystem().createNewCrashReportFile();
 	try {
 	    file.createNewFile();
 	    FileUtils.writeStringToFile(file, this.buffer.toString());
