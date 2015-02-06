@@ -50,6 +50,7 @@ public class Configuration implements IConfig {
 	Object obj = map.get(key);
 	if(!(obj instanceof String)) {
 	    Engine.getEngine().getLogger().error("The value of the key \'" + key + "\' is not a string!");
+	    return null;
 	}
 	return (String) obj;
     }
@@ -59,6 +60,7 @@ public class Configuration implements IConfig {
 	Object obj = map.get(key);
 	if(!(obj instanceof Boolean)) {
 	    Engine.getEngine().getLogger().error("The value of the key \'" + key + "\' is not a boolean!");
+	    return null;
 	}
 	return (Boolean) obj;
     }
@@ -68,6 +70,7 @@ public class Configuration implements IConfig {
 	Object obj = map.get(key);
 	if(!(obj instanceof Integer)) {
 	    Engine.getEngine().getLogger().error("The value of the key \'" + key + "\' is not a integer!");
+	    return null;
 	}
 	return (Integer) obj;
     }
@@ -77,6 +80,7 @@ public class Configuration implements IConfig {
 	Object obj = map.get(key);
 	if(!(obj instanceof Double)) {
 	    Engine.getEngine().getLogger().error("The value of the key \'" + key + "\' is not a double!");
+	    return null;
 	}
 	return (Double) obj;
     }
@@ -86,6 +90,7 @@ public class Configuration implements IConfig {
 	Object obj = map.get(key);
 	if(!(obj instanceof List)) {
 	    Engine.getEngine().getLogger().error("The value of the key \'" + key + "\' is not a list!");
+	    return null;
 	}
 	return (List) obj;
     }
