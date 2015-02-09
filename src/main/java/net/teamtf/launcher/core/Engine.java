@@ -15,6 +15,7 @@ import net.teamtf.launcher.provider.assests.AssestsProvider;
 import net.teamtf.launcher.provider.library.LibraryProvider;
 import net.teamtf.launcher.provider.natives.NativeProvider;
 import net.teamtf.launcher.provider.version.VersionProvider;
+import net.teamtf.launcher.selfupdate.UpdateChecker;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
@@ -43,6 +44,7 @@ public class Engine {
     private final File launcherDir;
     private final Log logger;
     private final TLFileSystem fileSystem;
+    private final UpdateChecker updateChecker;
     private UIController uiController;
     private Launcher launcher;
     private I18n i18n;
@@ -66,6 +68,9 @@ public class Engine {
         this.gameConfiguration = new Configuration(this.fileSystem.getGameConfigFile(), "gameconfig");
         
         this.gameDir = FileUtils.getFile(this.launcherConfiguration.getString("game.dir"));
+        
+        this.updateChecker = new UpdateChecker();
+        
         this.i18n = new DefaultI18n();
         this.logger.info(this.i18n.getTranslation("lang.welcome"));
         
